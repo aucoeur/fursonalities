@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView, SafeView, FlatList, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import Item from './Item'
-import { dogs } from './breeds'
+import { cats, dogs } from './breeds'
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
         <View style={styles.listContainer}>
           <FlatList
             keyExtractor={item => item.breed}
-            data={dogs}
+            data={cats}
             renderItem={({item, index}) => {
               return <Item data={item} index={index}/>
             }} />

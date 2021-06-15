@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
+import Feature from './Feature'
+
 export default function Item(props) {
   const { data, index } = props
   const { breed } = data
@@ -8,10 +10,10 @@ export default function Item(props) {
 
   return (
     <View style={style.container}>
-      <Text style={style.head}>{index}: {breed}</Text>
+      <Text style={style.head}>{breed}</Text>
       {
         keys.map(key =>
-            <Text>{key}{data[key]}</Text>
+            <Feature name={key} value={data[key]} />
         )
       }
     </View>
@@ -21,11 +23,6 @@ export default function Item(props) {
 const style = StyleSheet.create({
   head: {
     fontSize: 35
-  },
-  stats: {
-    fontSize: 20,
-    marginLeft: 30,
-    justifyContent: "space-between"
   },
   container: {
     padding: 10,

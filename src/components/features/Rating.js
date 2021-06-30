@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Feature(props) {
-  const { name, value } = props
+export default function Rating({ name, value }) {
+
   let stars = ''
-  // ☆★
+
+  // ★★★☆☆
   for (let i = 0; i < 5; i +=1) {
     i < value ? stars += '★' : stars += '☆'
   }
@@ -20,11 +21,14 @@ export default function Feature(props) {
 const style = StyleSheet.create({
   container: {
     display: 'flex',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 2
+    padding: 4,
   },
-  left: {},
+  left: {
+    fontSize: 18,
+  },
   right: {
     color: 'hsl(50, 100%, 45%)',
     fontSize: 20,

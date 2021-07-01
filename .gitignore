@@ -174,3 +174,4 @@ temp/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,node,expo
 n
+src/utils/color.css

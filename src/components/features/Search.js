@@ -3,17 +3,16 @@ import { StyleSheet, TextInput, View } from 'react-native';
 
 const style = StyleSheet.create({
   search: {
-    flexShrink: 0,
-    width: '95%',
-    height: 40,
-    marginBottom: 2,
-    backgroundColor: 'hsla(0, 0%, 0%, 0.08)',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: 15,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    borderRadius: 25,
-    // borderWidth: 1,
   },
   searchText: {
+    height: 40,
+    borderRadius: 25,
+    backgroundColor: 'hsl(0, 0%, 90%)',
     fontSize: 24,
     width: '100%',
     textAlign: 'center',

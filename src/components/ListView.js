@@ -1,42 +1,60 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import {
+  View, FlatList, StyleSheet, Platform, KeyboardAvoidingView, SafeAreaView,
+} from 'react-native';
 
 import Item from './features/Item';
 import Search from './features/Search';
 import { cats, dogs } from '../utils/breeds';
 
 const style = StyleSheet.create({
-  listContainer: {
+  container: {
     flex: 1,
-    // flexGrow: 1,
     justifyContent: 'space-around',
-    padding: 5,
+    alignItems: 'center',
+    width: '100%',
+  },
+  listContainer: {
+    padding: 15,
   },
 });
 
 export default function ListView({ navigation }) {
   const [search, setSearch] = useState('');
+  // const [species, setSpecies] = useState('cats');
 
   const data = cats;
+
   const searchFilter = data.filter((item) => item.breed.includes(search)
     || item.breed.toLowerCase().includes(search));
 
+  const renderItem = ({ item }) => (
+    <Item
+      name={item.breed}
+      showDetails={() => {
+        navigation.navigate('Details', { item });
+      }}
+    />
+  );
+
   return (
-    <View style={style.listContainer}>
-      <FlatList
-        data={searchFilter}
-        keyExtractor={data.breed}
-        renderItem={({ item }) => (
-          <Item
-            keyExtractor={item.breed}
-            name={item.breed}
-            showDetails={() => {
-              navigation.navigate('Details', { item });
-            }}
-          />
-        )}
-      />
-      <Search search={search} setSearch={setSearch} />
-    </View>
+    <SafeAreaView style={style.container}>
+
+      <View style={style.listContainer}>
+        <FlatList
+          data={searchFilter}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.breed}
+        />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'position' : null}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : null}
+        >
+          <Search search={search} setSearch={setSearch} />
+
+        </KeyboardAvoidingView>
+      </View>
+
+    </SafeAreaView>
   );
 }

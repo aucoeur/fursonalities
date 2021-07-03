@@ -1,31 +1,19 @@
-import { registerRootComponent } from 'expo';
 import React from 'react';
 
-import {
-  StyleSheet,
-} from 'react-native';
+import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
+import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import ListView from './components/ListView';
-import DetailView from './components/DetailView';
 
-const Stack = createStackNavigator();
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons as Icon } from 'react-native-vector-icons';
 
-const stackStyle = ({
-  // headerStatusBarHeight: 0, // Header had increased size with SafeArea for some reason (https://github.com/react-navigation/react-navigation/issues/5936)
-  headerStyle: {
-    backgroundColor: '#f4511e',
-  },
-  headerTintColor: '#fff',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-    fontSize: 24,
-  },
-});
+import HomeScreen from './screens/HomeScreen';
+import StackScreen from './screens/StackScreen';
+
+const Tab = createBottomTabNavigator();
 
 const style = StyleSheet.create({
   container: {
@@ -39,14 +27,39 @@ function App() {
     <SafeAreaProvider style={style.container}>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={stackStyle}
-        >
-          <Stack.Screen name="Home" component={ListView} options={{ title: 'Goodbye World' }} />
-          <Stack.Screen name="Details" component={DetailView} />
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-        </Stack.Navigator>
+              switch (route.name) {
+                case 'Home':
+                  iconName = focused ? 'ios-desktop' : 'ios-desktop-outline';
+                  break;
+                case 'Cats':
+                  iconName = focused ? 'ios-logo-octocat' : 'ios-logo-octocat';
+                  break;
+                case 'Dogs':
+                  iconName = focused ? 'ios-paw' : 'ios-paw';
+                  break;
+                default:
+                  // iconName = focused ? 'ios-desktop' : 'ios-desktop-outline'
+                  break;
+              }
+
+              // You can return any component that you like here!
+              return <Icon name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: 'tomato',
+            inactiveTintColor: 'gray',
+          }}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Cats" component={StackScreen} />
+          <Tab.Screen name="Dogs" component={StackScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
 
     </SafeAreaProvider>

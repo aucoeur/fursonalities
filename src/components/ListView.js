@@ -19,11 +19,11 @@ const style = StyleSheet.create({
   },
 });
 
-export default function ListView({ navigation }) {
+export default function ListView({ navigation, route }) {
   const [search, setSearch] = useState('');
-  // const [species, setSpecies] = useState('cats');
 
-  const data = cats;
+  const species = route.name;
+  const data = species === 'Cats' ? cats : dogs;
 
   const searchFilter = data.filter((item) => item.breed.includes(search)
     || item.breed.toLowerCase().includes(search));

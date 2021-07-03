@@ -32,12 +32,8 @@ export default function DetailView({ navigation, route }) {
       { keys.map((key) => <Rating key={key} name={key} value={item[key]} />) }
 
       <Button
-        title="Go back"
+        title="Back"
         onPress={() => navigation.goBack()}
-      />
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
       />
 
     </View>

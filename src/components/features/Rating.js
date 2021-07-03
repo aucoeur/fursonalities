@@ -1,22 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet } from "react-native";
-
-export default function Rating({ name, value }) {
-
-  let stars = ''
-
-  // ★★★☆☆
-  for (let i = 0; i < 5; i +=1) {
-    i < value ? stars += '★' : stars += '☆'
-  }
-
-  return (
-    <View style={style.container}>
-      <Text style={style.left}>{name}</Text>
-      <Text style={style.right}>{stars}</Text>
-    </View>
-  )
-}
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   container: {
@@ -33,4 +16,20 @@ const style = StyleSheet.create({
     color: 'hsl(50, 100%, 45%)',
     fontSize: 20,
   },
-})
+});
+
+export default function Rating({ name, value }) {
+  let stars = '';
+  console.log(value);
+  // ★★★☆☆
+  for (let i = 0; i < 5; i += 1) {
+    i < value ? stars += '★' : stars += '☆';
+  }
+
+  return (
+    <View style={style.container}>
+      <Text style={style.left}>{name}</Text>
+      <Text style={style.right}>{stars}</Text>
+    </View>
+  );
+}
